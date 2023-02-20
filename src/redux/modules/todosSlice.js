@@ -1,14 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+//--------initialState------//
 const initialState = {
   todos: [],
   isLoading: false,
   isError: false,
   error: null,
 };
+//--------initialState------//
 
+export const addList = createAsyncThunk("ADD_TODO", async (newList) => {
+  const response = await axios.post("http://localhost:4000/todos", newList);
+  return response.data;
+});
+
+//--------get------------//
 export const __getTodos = createAsyncThunk(
   "getTodos",
   async (payload, thunkAPI) => {
@@ -22,6 +29,7 @@ export const __getTodos = createAsyncThunk(
     }
   }
 );
+//--------get------------//
 
 export const todosSlice = createSlice({
   name: "todos",
@@ -45,5 +53,5 @@ export const todosSlice = createSlice({
   },
 });
 
-export const {} = todosSlice.actions;
+export const { ADD_TODO } = todosSlice.actions;
 export default todosSlice.reducer;
