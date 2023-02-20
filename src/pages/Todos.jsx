@@ -3,9 +3,18 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { __getTodos } from "../redux/modules/todosSlice";
+import {
+  deleteList,
+  __getTodos,
+  DELETE_TODO,
+} from "../redux/modules/todosSlice";
 
 function Todos() {
+  const onDeleteBtnHandler = async (id) => {
+    await dispatch(deleteList(id));
+    await dispatch(__getTodos());
+  };
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, error, todos } = useSelector((state) => {
@@ -32,14 +41,12 @@ function Todos() {
       >
         Home으로 갈까요?
       </button>
-      <div>
-        <h1>나도 내 할일이 있다 아닙니까!?</h1>
-      </div>
-      {todos.map((todo) => {
+      {todos?.map((todo) => {
         return (
           <StBox key={todo.id}>
             <h1> {todo.title} </h1>
             <h4>작성자 : {todo.writer}</h4>
+            <button onClick={() => onDeleteBtnHandler(todo.id)}>삭제</button>
           </StBox>
         );
       })}
