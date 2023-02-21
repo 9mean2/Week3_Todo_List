@@ -23,9 +23,16 @@ function Edit() {
   const foundData = data.find((todos) => {
     return todos.id == params.id;
   });
+
   useEffect(() => {
     dispatch(__getTodos());
   }, []);
+
+  useEffect(() => {
+    setTitle(foundData.title);
+    setContent(foundData.content);
+    setWriter(foundData.writer);
+  }, [foundData]);
 
   const onUpdateHandler = (event) => {
     event.preventDefault();
@@ -59,10 +66,10 @@ function Edit() {
               setWriter(event.target.value);
             }}
           />
-          <button onClick={onUpdateHandler}>수정</button>
+          <button onClick={onUpdateHandler}>Edit</button>
         </div>
       ) : (
-        <div>로딩중</div>
+        <div>Loading</div>
       )}
     </>
   );

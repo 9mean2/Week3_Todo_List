@@ -14,9 +14,9 @@ function Add() {
   const [writerValue, setWriterValue] = useState("");
   const [contentValue, setContentValue] = useState("");
 
-  const onCreate = (event) => {
+  const onCreate = async (event) => {
     event.preventDefault();
-    navigate("/todos");
+
     if ((titleValue, writerValue)) {
       const newList = {
         id: Date.now(),
@@ -24,12 +24,13 @@ function Add() {
         writer: writerValue,
         content: contentValue,
       };
+      navigate("/todos");
       dispatch(addList(newList));
       settitleValue("");
       setWriterValue("");
       setContentValue("");
     } else {
-      alert("뭐라도 적어야겠죠?");
+      alert("ㅇㅇ?");
     }
   };
 

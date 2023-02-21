@@ -51,6 +51,7 @@ function Todos() {
         );
       })}
       <br />
+      <StLink2 to={"/todos/add"}>추가 ㄱ</StLink2>
     </div>
   );
 }
@@ -71,4 +72,8 @@ const StBox = styled.div`
 const StLink = styled(Link)`
   text-decoration: none;
   color: black;
+`;
+
+const StLink2 = styled(Link)`
+  font-size: 24px;
 `;
