@@ -17,9 +17,13 @@ export const editList = createAsyncThunk(
     try {
       const response = await axios.put(
         `http://localhost:4000/todos/${payload.id}`,
-        { content: payload.content }
+        {
+          title: payload.title,
+          content: payload.content,
+          writer: payload.writer,
+        }
       );
-      //   console.log("response", response);
+      console.log("response", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       // console.log("error", error);
@@ -89,6 +93,9 @@ export const todosSlice = createSlice({
     },
     [deleteList.fulfilled]: (state, action) => {
       state.todos = state.todos.filter((item) => item.id !== action.payload);
+    },
+    [editList.fulfilled]: (state, aciton) => {
+      state.todos.push(aciton.payload);
     },
   },
 });
