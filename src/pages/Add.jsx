@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { addList } from "../redux/modules/todosSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import useInputFoucs from "../hooks/useInputAutoFocus";
 
 function Add() {
+  const inputRef = useInputFoucs();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,17 +22,23 @@ function Add() {
         id: Date.now(),
         title: titleValue,
         writer: writerValue,
+        content: contentValue,
       };
       dispatch(addList(newList));
       settitleValue("");
       setWriterValue("");
+      setContentValue("");
+    } else {
+      alert("뭐라도 적어야겠죠?");
     }
   };
+
   return (
     <form onSubmit={onCreate}>
       <h2>작성자</h2>
       <input
         type="text"
+        ref={inputRef}
         onChange={(event) => setWriterValue(event.target.value)}
         value={writerValue}
         placeholder="이름이 뭔가요!!"
@@ -53,7 +61,6 @@ function Add() {
       />
       <br />
       <button type="submit">추가</button>
-      <Link to={"/todos"}>작성한거 보러가시죠?</Link>;
     </form>
   );
 }

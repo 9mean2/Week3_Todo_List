@@ -11,7 +11,7 @@ function Home() {
         <img src="https://ifh.cc/g/HHGWh7.png" />
       </Nav>
       <h1>
-        안녕하세요
+        안녕하세요, 감사해요, 잘있어요, 다시 만나요!
         <StyledLink to={"/todos/add"}>할 일 추가하기!</StyledLink>
         <br />
         <StyledLink to={"/todos"}>할 일 목록 보러가기!</StyledLink>
@@ -23,6 +23,8 @@ function Home() {
 export default Home;
 
 const StyledLink = styled(Link)`
+  border-radius: 25px;
+  margin: 0px 1% 0% 1%;
   border: 1px solid gray;
   display: block;
   text-align: center;

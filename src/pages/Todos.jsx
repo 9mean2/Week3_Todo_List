@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import {
-  deleteList,
-  __getTodos,
-  DELETE_TODO,
-} from "../redux/modules/todosSlice";
+import { deleteList, __getTodos } from "../redux/modules/todosSlice";
 
 function Todos() {
   const onDeleteBtnHandler = async (id) => {
@@ -44,7 +41,10 @@ function Todos() {
       {todos?.map((todo) => {
         return (
           <StBox key={todo.id}>
-            <h1> {todo.title} </h1>
+            <StLink to={`/todos/${todo.id}`}>
+              {" "}
+              <h1> {todo.title} </h1>
+            </StLink>
             <h4>작성자 : {todo.writer}</h4>
             <button onClick={() => onDeleteBtnHandler(todo.id)}>삭제</button>
           </StBox>
@@ -66,4 +66,9 @@ const StBox = styled.div`
   color: black;
   margin: 0px 1% 1% 1%;
   border-radius: 50px;
+`;
+
+const StLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;

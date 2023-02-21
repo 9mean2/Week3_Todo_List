@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 //--------initialState------//
 const initialState = {
@@ -11,6 +10,25 @@ const initialState = {
   error: null,
 };
 //--------initialState------//
+//----------PUt-------------//
+export const editList = createAsyncThunk(
+  "EDIT_TODO",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/todos/${payload.id}`,
+        { content: payload.content }
+      );
+      //   console.log("response", response);
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      // console.log("error", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+//----------PUt-------------//
 
 //----------delete------------//
 export const deleteList = createAsyncThunk("DELETE_TODO", async (id) => {
@@ -21,10 +39,12 @@ export const deleteList = createAsyncThunk("DELETE_TODO", async (id) => {
 //----------delete------------//
 
 //------------post------------------//
+
 export const addList = createAsyncThunk("ADD_TODO", async (newList) => {
   const response = await axios.post("http://localhost:4000/todos", newList);
   return response.data;
 });
+
 //------------post------------------//
 
 //--------get------------//
@@ -33,7 +53,7 @@ export const __getTodos = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios.get("http://localhost:4000/todos");
-      console.log("response", response);
+      //   console.log("response", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       console.log("error", error);
@@ -73,5 +93,4 @@ export const todosSlice = createSlice({
   },
 });
 
-export const { ADD_TODO, DELETE_TODO } = todosSlice.actions;
 export default todosSlice.reducer;
