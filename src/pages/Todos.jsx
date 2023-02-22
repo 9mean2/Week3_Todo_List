@@ -31,27 +31,28 @@ function Todos() {
 
   return (
     <div>
-      <button
+      <StBtn
         onClick={() => {
           navigate("/");
         }}
       >
-        Home으로 갈까요?
-      </button>
+        <h1>Home으로 갈까요? </h1>
+      </StBtn>
       {todos?.map((todo) => {
         return (
           <StBox key={todo.id}>
             <StLink to={`/todos/${todo.id}`}>
-              {" "}
               <h1> {todo.title} </h1>
             </StLink>
             <h4>작성자 : {todo.writer}</h4>
-            <button onClick={() => onDeleteBtnHandler(todo.id)}>삭제</button>
+            <StBtn2 onClick={() => onDeleteBtnHandler(todo.id)}>
+              <h2>🗑️</h2>
+            </StBtn2>
           </StBox>
         );
       })}
       <br />
-      <StLink2 to={"/todos/add"}>추가 ㄱ</StLink2>
+      <StLink2 to={"/todos/add"}>추가하기</StLink2>
     </div>
   );
 }
@@ -59,7 +60,6 @@ function Todos() {
 export default Todos;
 
 const StBox = styled.div`
-  border: 1px solid gray;
   display: block;
   text-align: center;
   padding: 40px;
@@ -67,6 +67,8 @@ const StBox = styled.div`
   color: black;
   margin: 0px 1% 1% 1%;
   border-radius: 50px;
+  background-image: url("https://ifh.cc/g/500wg6.png");
+  background-size: cover;
 `;
 
 const StLink = styled(Link)`
@@ -76,4 +78,25 @@ const StLink = styled(Link)`
 
 const StLink2 = styled(Link)`
   font-size: 24px;
+`;
+
+const StBtn = styled.button`
+  margin-bottom: 1%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-direction: row;
+  border: 1px solid rgb(238, 238, 238);
+  background-color: rgb(255, 255, 255);
+  height: 46px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+`;
+
+const StBtn2 = styled.button`
+  width: 3%;
+  height: 1%;
 `;

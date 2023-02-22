@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
 import { editList, __getTodos } from "../redux/modules/todosSlice";
 
 function Edit() {
@@ -44,14 +44,30 @@ function Edit() {
   return (
     <>
       {data.length !== 0 ? (
-        <div>
-          {foundData.writer} <br />
+        <StDiv>
+          <h1>
+            작성자 : <br />
+          </h1>
+          <input
+            value={writer}
+            onChange={(event) => {
+              setWriter(event.target.value);
+            }}
+          />
+          <br />
+          <h1>
+            타이틀 : <br />
+          </h1>
           <input
             value={title}
             onChange={(event) => {
               setTitle(event.target.value);
             }}
           />
+          <br />
+          <h1>
+            콘텐츠 :<br />
+          </h1>
           <textarea
             cols="200"
             rows="50"
@@ -60,14 +76,8 @@ function Edit() {
               setContent(event.target.value);
             }}
           />
-          <input
-            value={writer}
-            onChange={(event) => {
-              setWriter(event.target.value);
-            }}
-          />
-          <button onClick={onUpdateHandler}>Edit</button>
-        </div>
+          <StBtn onClick={onUpdateHandler}>Edit</StBtn>
+        </StDiv>
       ) : (
         <div>Loading</div>
       )}
@@ -76,3 +86,23 @@ function Edit() {
 }
 
 export default Edit;
+
+const StDiv = styled.div`
+  margin: 1% 3% 1% 3%;
+`;
+
+const StBtn = styled.button`
+  margin-top: 0.5%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-direction: row;
+  border: 1px solid rgb(238, 238, 238);
+  background-color: rgb(255, 255, 255);
+  height: 46px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+`;
