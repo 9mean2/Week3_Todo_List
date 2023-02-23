@@ -74,6 +74,7 @@ const StBox = styled.div`
   border-radius: 50px;
   background-color: white;
   background-size: cover;
+  box-shadow: 10px 5px 10px 5px rgb(0, 0, 0, 0.4);
 `;
 
 const StLink = styled(Link)`

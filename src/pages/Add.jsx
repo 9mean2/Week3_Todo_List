@@ -5,8 +5,11 @@ import { useNavigate } from "react-router-dom";
 import useInputFoucs from "../hooks/useInputAutoFocus";
 import styled from "styled-components";
 import { MdAddCircle } from "react-icons/md";
+import useAuthority from "../hooks/useAuthority";
 
 function Add() {
+  useAuthority();
+
   const inputRef = useInputFoucs();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -110,19 +113,12 @@ const StBtn = styled.button`
   border: 0;
 `;
 
-const StInput = styled.input`
-  width: 20%;
-  height: 50px;
-  border: 100px;
-  border-radius: 0;
-`;
-
 const Stinput1 = styled.input`
   font-size: 20px;
   border-radius: 1rem;
   width: 90%;
   height: 3vh;
-  border: 0;
+  border: 1px solid black;
 `;
 
 const StDiv1 = styled.div`
@@ -133,6 +129,9 @@ const StDiv1 = styled.div`
   width: 100%;
   border: 5px solid white;
   border-radius: 2rem;
+  background-color: white;
+  box-shadow: 10px 5px 10px 5px rgb(0, 0, 0, 0.4);
+
   textarea {
     font-size: 24px;
     border-radius: 1rem;

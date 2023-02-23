@@ -6,8 +6,11 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { editList, __getTodos } from "../redux/modules/todosSlice";
 import { BsCheckLg } from "react-icons/bs";
+import useAuthority from "../hooks/useAuthority";
 
 function Edit() {
+  useAuthority();
+
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [writer, setWriter] = useState("");
@@ -100,6 +103,8 @@ const StDiv = styled.div`
   width: 100%;
   border: 5px solid white;
   border-radius: 2rem;
+  background-color: white;
+  box-shadow: 10px 5px 10px 5px rgb(0, 0, 0, 0.4);
   textarea {
     font-size: 24px;
     border-radius: 1rem;
@@ -151,5 +156,5 @@ const Stinput = styled.input`
   border-radius: 1rem;
   width: 90%;
   height: 3vh;
-  border: 0;
+  border: 1px solid black;
 `;

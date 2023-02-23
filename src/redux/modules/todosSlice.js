@@ -17,7 +17,7 @@ export const editList = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios.put(
-        `http://localhost:4000/todos/${payload.id}`,
+        `${process.env.REACT_APP_TODOS_URL}/todos/${payload.id}`,
         {
           title: payload.title,
           content: payload.content,
@@ -37,7 +37,9 @@ export const editList = createAsyncThunk(
 
 //----------delete------------//
 export const deleteList = createAsyncThunk("DELETE_TODO", async (id) => {
-  const response = await axios.delete(`http://localhost:4000/todos/${id}`);
+  const response = await axios.delete(
+    `${process.env.REACT_APP_TODOS_URL}/todos/${id}`
+  );
   return id;
 });
 
@@ -46,7 +48,10 @@ export const deleteList = createAsyncThunk("DELETE_TODO", async (id) => {
 //------------post------------------//
 
 export const addList = createAsyncThunk("ADD_TODO", async (newList) => {
-  const response = await axios.post("http://localhost:4000/todos", newList);
+  const response = await axios.post(
+    `${process.env.REACT_APP_TODOS_URL}/todos`,
+    newList
+  );
   return response.data;
 });
 
@@ -57,7 +62,9 @@ export const __getTodos = createAsyncThunk(
   "getTodos",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get("http://localhost:4000/todos");
+      const response = await axios.get(
+        `${process.env.REACT_APP_TODOS_URL}/todos`
+      );
       //   console.log("response", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {

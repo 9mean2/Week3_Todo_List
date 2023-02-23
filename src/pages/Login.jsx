@@ -1,6 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+//jwt 관련
+import { jwtserver } from "../util/api";
+import Cookies from "js-cookie";
 
 const LoginContainer = styled.div`
   background-color: #fafafa;
@@ -13,7 +17,8 @@ const LoginContainer = styled.div`
 const LoginFormContainer = styled.div`
   background-color: #fff;
   border: 1px solid #dbdbdb;
-  width: 350px;
+  width: 450px;
+  height: 400px;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -23,7 +28,7 @@ const LoginFormContainer = styled.div`
 
 const Logo = styled.img`
   width: 250px;
-  margin-bottom: 20px;
+  margin: 7% auto 20px auto;
 `;
 
 const Input = styled.input`
@@ -74,6 +79,9 @@ const StLink = styled(Link)`
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  //쿠키를 불러옴
+  const getCookie = Cookies.get("token");
+  const navigate = useNavigate();
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);
@@ -83,11 +91,36 @@ function Login() {
     setPassword(event.target.value);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    // TODO: 로그인 요청 보내기
-  }
+  useEffect(() => {
+    if (getCookie) {
+      moveToHome();
+    }
+  }, [getCookie]);
 
+  const handleSubmit = async (e) => {
+    let now = new Date();
+    const expiryDate = new Date(now.setMinutes(now.getMinutes() + 10));
+
+    e.preventDefault();
+    if (username !== "" && password !== "") {
+      try {
+        const response = await jwtserver.post("/login", {
+          id: username,
+          password: password,
+        });
+        alert("로그인에 성공하여 정상적으로 토큰이 발급 되었습니다.");
+        const { token } = response.data;
+        moveToHome();
+        Cookies.set("token", token, { expires: expiryDate });
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    }
+  };
+
+  const moveToHome = () => {
+    navigate("/");
+  };
   return (
     <LoginContainer>
       <LoginFormContainer>
@@ -109,7 +142,7 @@ function Login() {
         </form>
         <Footer>
           <span>계정이 없으신가요?</span>
-          <StLink to={"/signup"}>가입하기</StLink>
+          <button onClick={() => navigate("/signup")}>가입하기</button>
         </Footer>
       </LoginFormContainer>
     </LoginContainer>

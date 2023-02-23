@@ -7,8 +7,11 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { __getTodos } from "../redux/modules/todosSlice";
 import { MdOutlineEditNote } from "react-icons/md";
+import useAuthority from "../hooks/useAuthority";
 
 function Detail() {
+  useAuthority();
+
   const navigate = useNavigate();
   const data = useSelector((state) => {
     // console.log("state", state);
@@ -39,7 +42,7 @@ function Detail() {
             </StDialogHeader>
             <StTitle>
               {" "}
-              <h3>제목 : {foundData.title}</h3>
+              <h2>제목 : {foundData.title}</h2>
             </StTitle>
 
             <StContent>
@@ -128,7 +131,7 @@ const StTitle = styled.p`
 
 const StContent = styled.p`
   padding: 0 24px;
-  font-size: 50px;
+  font-size: 45px;
   font: bold;
   background-color: white;
   border-radius: 1rem;
@@ -140,8 +143,9 @@ const StDiv = styled.div`
   min-height: 900px;
   height: 95%;
   width: 100%;
-  background-color: white;
   border-radius: 2rem;
+  background-color: white;
+  box-shadow: 10px 5px 10px 5px rgb(0, 0, 0, 0.4);
 `;
 
 const StDiv4 = styled.div`

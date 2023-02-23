@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { jwtserver } from "../util/api";
 
 const SignupContainer = styled.div`
   background-color: #fafafa;
@@ -13,7 +14,8 @@ const SignupContainer = styled.div`
 const SignupFormContainer = styled.div`
   background-color: #fff;
   border: 1px solid #dbdbdb;
-  width: 350px;
+  width: 450px;
+  height: 400px;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -23,7 +25,7 @@ const SignupFormContainer = styled.div`
 
 const Logo = styled.img`
   width: 250px;
-  margin-bottom: 20px;
+  margin: 7% auto 20px auto;
 `;
 
 const Input = styled.input`
@@ -64,6 +66,7 @@ const Footer = styled.div`
 function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);
@@ -73,16 +76,30 @@ function Signup() {
     setPassword(event.target.value);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    // TODO: 회원가입 요청 보내기
-  }
-
+  const signUpSubmitHandler = async (e) => {
+    e.preventDefault();
+    if (username !== "" && password !== "") {
+      try {
+        await jwtserver.post("/register", {
+          id: username,
+          password: password,
+        });
+        alert("회원가입이 완료 되었습니다.");
+        moveToSignIn();
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.data.message);
+      }
+    }
+  };
+  const moveToSignIn = () => {
+    navigate("/login");
+  };
   return (
     <SignupContainer>
       <SignupFormContainer>
         <Logo src="https://ifh.cc/g/Z4xDJH.png" />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={signUpSubmitHandler}>
           <Input
             type="text"
             placeholder="Username"
@@ -99,7 +116,7 @@ function Signup() {
         </form>
         <Footer>
           <span>계정이 이미 있으신가요? &nbsp; </span>
-          <Link to={"/login"}>로그인</Link>
+          <button onClick={moveToSignIn}>로그인</button>
         </Footer>
       </SignupFormContainer>
     </SignupContainer>
