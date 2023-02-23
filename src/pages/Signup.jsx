@@ -3,6 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { jwtserver } from "../util/api";
 
+const Btn = styled.button`
+  background: transparent;
+  border: 0;
+  color: #0095f6;
+  cursor: pointer;
+`;
+
 const SignupContainer = styled.div`
   background-color: #fafafa;
   height: 100vh;
@@ -116,7 +123,7 @@ function Signup() {
         </form>
         <Footer>
           <span>계정이 이미 있으신가요? &nbsp; </span>
-          <button onClick={moveToSignIn}>로그인</button>
+          <Btn onClick={moveToSignIn}>로그인</Btn>
         </Footer>
       </SignupFormContainer>
     </SignupContainer>

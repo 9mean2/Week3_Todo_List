@@ -6,6 +6,13 @@ import styled from "styled-components";
 import { jwtserver } from "../util/api";
 import Cookies from "js-cookie";
 
+const Btn = styled.button`
+  background: transparent;
+  border: 0;
+  color: #0095f6;
+  cursor: pointer;
+`;
+
 const LoginContainer = styled.div`
   background-color: #fafafa;
   height: 100vh;
@@ -142,7 +149,7 @@ function Login() {
         </form>
         <Footer>
           <span>계정이 없으신가요?</span>
-          <button onClick={() => navigate("/signup")}>가입하기</button>
+          <Btn onClick={() => navigate("/signup")}>가입하기</Btn>
         </Footer>
       </LoginFormContainer>
     </LoginContainer>
