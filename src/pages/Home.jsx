@@ -24,9 +24,7 @@ function Home() {
     </div>
   );
 }
-
 export default Home;
-
 const StyledLink = styled(Link)`
   border-radius: 25px;
   margin: auto;
