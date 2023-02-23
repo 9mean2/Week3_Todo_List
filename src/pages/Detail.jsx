@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { __getTodos } from "../redux/modules/todosSlice";
+import { MdOutlineEditNote } from "react-icons/md";
 
 function Detail() {
   const navigate = useNavigate();
@@ -31,23 +32,35 @@ function Detail() {
   return (
     <>
       {data.length !== 0 ? (
-        <div>
-          <StDialogHeader> {`작성자 : ${foundData.writer}`}</StDialogHeader>
-          <StTitle> 제목 : {foundData.title}</StTitle>
+        <StDiv4>
+          <StDiv>
+            <StDialogHeader>
+              {" "}
+              <h3>{`작성자 : ${foundData.writer}`}</h3>
+            </StDialogHeader>
+            <StTitle>
+              {" "}
+              <h3>제목 : {foundData.title}</h3>
+            </StTitle>
 
-          <StContent>할 일 : {foundData.content}</StContent>
+            <StContent>
+              <h3>할 일 : {foundData.content}</h3>
+            </StContent>
 
-          <div>
-            <StLink to={"/todos"}>이전으로!</StLink>
-            <EditBtn
-              onClick={() => {
-                navigate(`/todos/edit/${foundData.id}`);
-              }}
-            >
-              수정하기
-            </EditBtn>
-          </div>
-        </div>
+            <div>
+              <StLink to={"/todos"}>이전으로!</StLink>
+              <EditBtn
+                onClick={() => {
+                  navigate(`/todos/edit/${foundData.id}`);
+                }}
+              >
+                <h2>
+                  <MdOutlineEditNote />
+                </h2>
+              </EditBtn>
+            </div>
+          </StDiv>
+        </StDiv4>
       ) : (
         <div>로딩중</div>
       )}
@@ -64,9 +77,12 @@ const StDialogHeader = styled.div`
   padding: 0 24px;
   align-items: center;
   font-size: 24px;
+  background-color: white;
+  border-radius: 1rem;
 `;
 
 const EditBtn = styled.button`
+  font-size: 25px;
   display: flex;
   -webkit-box-align: center;
   align-items: center;
@@ -78,8 +94,18 @@ const EditBtn = styled.button`
   height: 46px;
   border-radius: 8px;
   cursor: pointer;
-  width: 100%;
-  font-size: 24px;
+  width: 94%;
+  bottom: 3%;
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  &:hover {
+    color: white;
+    background-color: #406af0;
+    transition: 0.5s ease;
+  }
+  border: 0;
 `;
 
 const StLink = styled(Link)`
@@ -97,10 +123,33 @@ const StTitle = styled.p`
   padding: 0 24px;
   font-size: 20px;
   font: bold;
+  background-color: white;
+  border-radius: 1rem;
 `;
 
 const StContent = styled.p`
   padding: 0 24px;
   font-size: 50px;
   font: bold;
+  background-color: white;
+  border-radius: 1rem;
+`;
+
+const StDiv = styled.div`
+  margin: auto;
+  padding: 1rem;
+  min-height: 900px;
+  height: 95%;
+  width: 100%;
+  background-color: white;
+  border-radius: 2rem;
+`;
+
+const StDiv4 = styled.div`
+  padding: 16rem;
+  margin: auto;
+
+  display: flex;
+  width: 50%;
+  min-height: 90px;
 `;

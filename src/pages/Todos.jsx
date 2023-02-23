@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { deleteList, __getTodos } from "../redux/modules/todosSlice";
+import { MdHome } from "react-icons/md";
+import { VscTrash } from "react-icons/vsc";
 
 function Todos() {
   const onDeleteBtnHandler = async (id) => {
@@ -36,7 +38,9 @@ function Todos() {
           navigate("/");
         }}
       >
-        <h1>Home으로 갈까요? </h1>
+        <h1>
+          <MdHome />
+        </h1>
       </StBtn>
       {todos?.map((todo) => {
         return (
@@ -46,13 +50,14 @@ function Todos() {
             </StLink>
             <h4>작성자 : {todo.writer}</h4>
             <StBtn2 onClick={() => onDeleteBtnHandler(todo.id)}>
-              <h2>🗑️</h2>
+              <h2>
+                <VscTrash />
+              </h2>
             </StBtn2>
           </StBox>
         );
       })}
       <br />
-      <StLink2 to={"/todos/add"}>추가하기</StLink2>
     </div>
   );
 }
@@ -67,17 +72,18 @@ const StBox = styled.div`
   color: black;
   margin: 0px 1% 1% 1%;
   border-radius: 50px;
-  background-image: url("https://ifh.cc/g/500wg6.png");
+  background-color: white;
   background-size: cover;
 `;
 
 const StLink = styled(Link)`
   text-decoration: none;
   color: black;
-`;
-
-const StLink2 = styled(Link)`
-  font-size: 24px;
+  &:hover {
+    color: #406af0;
+    transition: 0.5s ease;
+    border: 0;
+  }
 `;
 
 const StBtn = styled.button`
@@ -94,9 +100,30 @@ const StBtn = styled.button`
   border-radius: 8px;
   cursor: pointer;
   width: 100%;
+  &:hover {
+    background-color: #406af0;
+    color: white;
+    transition: 0.5s ease;
+    border: 0;
+  }
 `;
 
 const StBtn2 = styled.button`
-  width: 3%;
-  height: 1%;
+  border: 0;
+  font-size: 19px;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.2s ease;
+  &:hover {
+    color: tomato;
+  }
+`;
+
+const StDiv4 = styled.div`
+  padding: 16rem;
+  margin: auto;
+
+  display: flex;
+  width: 50%;
+  min-height: 90px;
 `;

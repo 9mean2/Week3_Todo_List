@@ -1,20 +1,8 @@
 body {
   background-color: transparent;
   vertical-align: middle;
-  height: 100vh;
-}
 
-html {
-  font-family: "yg-jalnan";
-  background-image: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.035),
-      rgba(0, 0, 0, 0)
-    ),
-    url("https://ifh.cc/g/xZASWW.jpg");
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background: linear-gradient(90deg, #f2a056, #ce04bf);
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
