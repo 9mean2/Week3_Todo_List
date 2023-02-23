@@ -118,12 +118,3 @@ const StBtn2 = styled.button`
     color: tomato;
   }
 `;
-
-const StDiv4 = styled.div`
-  padding: 16rem;
-  margin: auto;
-
-  display: flex;
-  width: 50%;
-  min-height: 90px;
-`;
