@@ -31,7 +31,7 @@ function Add() {
       setWriterValue("");
       setContentValue("");
     } else {
-      alert("음.. 뭐라도 입력을 하셔야겠죠..?");
+      alert("빈 칸을 채워주세요");
     }
   };
 
@@ -46,16 +46,16 @@ function Add() {
               ref={inputRef}
               onChange={(event) => setWriterValue(event.target.value)}
               value={writerValue}
-              placeholder="이름이 뭔가요!!"
+              placeholder="작성자 "
             />
-            <h2>뭐라도 적어보셔</h2>
+            <h2>제목</h2>
             <Stinput1
               type="text"
               onChange={(event) => settitleValue(event.target.value)}
               value={titleValue}
-              placeholder="너가 할 일이 뭐가있냐 ! "
+              placeholder="제목을 입력해주세요 "
             />
-            <h2>내용임!!</h2>
+            <h2>오늘 할 일</h2>
             <textarea
               cols="183"
               rows="30"

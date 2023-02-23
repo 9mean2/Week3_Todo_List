@@ -35,7 +35,6 @@ function Detail() {
         <StDiv4>
           <StDiv>
             <StDialogHeader>
-              {" "}
               <h3>{`작성자 : ${foundData.writer}`}</h3>
             </StDialogHeader>
             <StTitle>
