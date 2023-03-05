@@ -6,10 +6,10 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { editList, __getTodos } from "../redux/modules/todosSlice";
 import { BsCheckLg } from "react-icons/bs";
-import useAuthority from "../hooks/useAuthority";
+// import useAuthority from "../hooks/useAuthority";
 
 function Edit() {
-  useAuthority();
+  // useAuthority();
 
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");

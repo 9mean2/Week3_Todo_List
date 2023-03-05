@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import useInputFoucs from "../hooks/useInputAutoFocus";
 import styled from "styled-components";
 import { MdAddCircle } from "react-icons/md";
-import useAuthority from "../hooks/useAuthority";
+// import useAuthority from "../hooks/useAuthority";
 
 function Add() {
-  useAuthority();
+  // useAuthority();
 
   const inputRef = useInputFoucs();
   const dispatch = useDispatch();
@@ -28,11 +28,12 @@ function Add() {
         writer: writerValue,
         content: contentValue,
       };
-      navigate("/todos");
+      console.log("추가하기", newList);
       dispatch(addList(newList));
       settitleValue("");
       setWriterValue("");
       setContentValue("");
+      // navigate("/todos");
     } else {
       alert("빈 칸을 채워주세요");
     }

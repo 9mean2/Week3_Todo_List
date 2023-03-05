@@ -7,10 +7,10 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { __getTodos } from "../redux/modules/todosSlice";
 import { MdOutlineEditNote } from "react-icons/md";
-import useAuthority from "../hooks/useAuthority";
+// import useAuthority from "../hooks/useAuthority";
 
 function Detail() {
-  useAuthority();
+  // useAuthority();
 
   const navigate = useNavigate();
   const data = useSelector((state) => {

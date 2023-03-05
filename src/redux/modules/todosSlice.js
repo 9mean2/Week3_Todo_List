@@ -46,8 +46,17 @@ export const deleteList = createAsyncThunk("DELETE_TODO", async (id) => {
 //----------delete------------//
 
 //------------post------------------//
-
 export const addList = createAsyncThunk("ADD_TODO", async (newList) => {
+  console.log("생성 createAsyncThunk", newList);
+  // createAsyncThunk => 비동기 통신&전역상태관리 사용하려면 이 함수 써
+  // createAsyncThunk(key값, async함수)
+  // async(payload === 내가 전달 해야하는 값 & 내가 써야 하는 값 , thunkAPI)
+  // const newList = {
+  //   id: Date.now(),
+  //   title: titleValue,
+  //   writer: writerValue,
+  //   content: contentValue,
+  // };
   const response = await axios.post(
     `${process.env.REACT_APP_TODOS_URL}/todos`,
     newList
@@ -58,21 +67,19 @@ export const addList = createAsyncThunk("ADD_TODO", async (newList) => {
 //------------post------------------//
 
 //--------get------------//
-export const __getTodos = createAsyncThunk(
-  "getTodos",
-  async (payload, thunkAPI) => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_TODOS_URL}/todos`
-      );
-      //   console.log("response", response);
-      return thunkAPI.fulfillWithValue(response.data);
-    } catch (error) {
-      console.log("error", error);
-      return thunkAPI.rejectWithValue(error);
-    }
+export const __getTodos = createAsyncThunk("getTodos", async (_, thunkAPI) => {
+  // _ 첫번째 인자값 사용하지 않는데, 두번째 값은 사용해야 할때
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_TODOS_URL}/todos`
+    );
+    //   console.log("response", response);
+    return thunkAPI.fulfillWithValue(response.data);
+  } catch (error) {
+    console.log("error", error);
+    return thunkAPI.rejectWithValue(error);
   }
-);
+});
 //--------get------------//
 
 //------------리듀서!!!-----------//
