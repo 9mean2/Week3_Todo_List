@@ -28,11 +28,7 @@ function Add() {
         writer: writerValue,
         content: contentValue,
       };
-      console.log("추가하기", newList);
       dispatch(addList(newList));
-      settitleValue("");
-      setWriterValue("");
-      setContentValue("");
       // navigate("/todos");
     } else {
       alert("빈 칸을 채워주세요");
