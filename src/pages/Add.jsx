@@ -29,6 +29,9 @@ function Add() {
         content: contentValue,
       };
       dispatch(addList(newList));
+      settitleValue("");
+      setWriterValue("");
+      setContentValue("");
       // navigate("/todos");
     } else {
       alert("빈 칸을 채워주세요");

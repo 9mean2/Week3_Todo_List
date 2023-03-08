@@ -14,7 +14,6 @@ function Detail() {
 
   const navigate = useNavigate();
   const data = useSelector((state) => {
-    // console.log("state", state);
     return state.todos.todos;
   });
   //state = 스토어
