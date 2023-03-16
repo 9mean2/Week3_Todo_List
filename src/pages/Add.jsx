@@ -32,7 +32,6 @@ function Add() {
       settitleValue("");
       setWriterValue("");
       setContentValue("");
-      // navigate("/todos");
     } else {
       alert("빈 칸을 채워주세요");
     }
