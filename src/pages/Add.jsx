@@ -33,7 +33,7 @@ function Add() {
       setWriterValue("");
       setContentValue("");
     } else {
-      alert("빈 칸을 채워주세요");
+      alert("빈 칸을 채워잇!");
     }
   };
 
